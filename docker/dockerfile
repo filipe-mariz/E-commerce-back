@@ -1,0 +1,12 @@
+FROM node:12.20.1
+
+RUN mkdir /usr/src/app
+WORKDIR /usr/src/app
+
+COPY . .
+
+EXPOSE 8080
+
+RUN npm install --silent
+
+CMD ["node", "ace", "serve", "--watch"]
