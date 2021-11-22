@@ -5,9 +5,18 @@ const json = {
 	host: process.env.DB_HOST,
 	username: process.env.DB_USER,
 	database: process.env.DB_NAME,
-	password: process.env.DB_PASSWORD
+	password: process.env.DB_PASSWORD,
+	operatorsAliases: false,
+	logging: false,
+	define: {
+		timestamps: true,
+		underscored: true,
+		underscoredAll: true
+	}
 };
 
-export const test = json;
-export const production = json;
-export const development = json;
+module.exports = {
+	test: json,
+	production: json,
+	development: json
+};
