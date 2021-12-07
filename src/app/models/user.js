@@ -23,8 +23,6 @@ class UserModel {
             }
         );
 
-        // AuthUtils
-
         User.prototype.checkPassword = password => {
             return bcrypt.compare(password, this.password_hash);
         };

@@ -1,4 +1,4 @@
-import  UserService  from '../services/user_admin';
+import  UserService  from '../services/user';
 
 class UserController {
 	async create(req, res) {
@@ -11,7 +11,7 @@ class UserController {
 		}
 	}
 
-	async read(req, res) {
+	async read (req, res) {
 		try {
 			const filter = {
 				id: req.filter.id

@@ -4,4 +4,4 @@ import express from 'express';
 
 const app = express();
 
-app.listen(process.env.PORT, ()=> console.log('Server is run'));
+app.listen(3333, ()=> console.log('Server is run'));
