@@ -1,68 +1,52 @@
 import  UserService  from '../services/user';
+import HandleApi from '../../errors/handle-api';
 
 class UserController {
-	async create(req, res) {
+	async createAction(req, res) {
 		try {
 			const response = await UserService.add(...req.body)
 
-			return res.json(response);
+			return HandleApi.handleResponse(req, response);
 		} catch (error) {
-			console.log(error);
+			return HandleApi.handleError(req, res, error);
 		}
 	}
 
-	async read (req, res) {
+	async readAction (req, res) {
 		try {
-			const filter = {
-				id: req.filter.id
-			};
+			const filter = req.filter.id;
 
-			const response = await UserService.read(filter);
+			const action = filter ? 'find' : 'listAll';
+			const response = await UserService[action](filter);
 
-			return res.json(response);
+			return HandleApi.handleResponse(req, response);
 		} catch (error) {
-			return res.json({
-				error,
-				message: "Errro"
-			});
+			return HandleApi.handleError(req, res, error);
 		}
 	}
 
-	async put(req, res) {
+	async updateAction (req, res) {
 		try {
-			const filter = {
-				id: req.filter.id
-			}
-
+			const filter = req.filter.id;
 			const changes = req.data;
 
 			const response = await UserService.update(filter, changes);
 
-			return res.json(response);
+			return HandleApi.handleResponse(req, response);
 		} catch (error) {
-			return res.json({
-				error,
-				message: "Errro"
-			});
+			return HandleApi.handleError(req, res, error);
 		}
 	}
 
-	async delete(req, res) {
+	async deleteAction (req, res) {
 		try {
-			const filter = {
-				id: req.data.id
-			};
+			const filter = req.filter.id
 
 			await UserService.delete(filter);
 
-			return res.status(200).json({
-				message: 'User deleted sucessfully'
-			})
+			return HandleApi.handleResponse(res, response);
 		} catch (error) {
-			return res.status(400).json({
-				message: 'Error',
-				error
-			})
+			return HandleApi.handleError(req, res, error);
 		}
 	}
 }

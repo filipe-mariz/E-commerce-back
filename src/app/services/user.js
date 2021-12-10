@@ -1,6 +1,6 @@
 import UserModel  from '../models/user';
 
-class UserService {
+export default new  class UserService {
     add (addHospital) {
         return UserModel.create(addHospital)
     }
@@ -17,5 +17,3 @@ class UserService {
         return UserModel.destroy({ where: filter });
     }
 }
-
-export default new UserService();

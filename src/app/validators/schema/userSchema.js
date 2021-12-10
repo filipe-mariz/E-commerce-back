@@ -1,8 +1,8 @@
-module.exports = () => {
-    const yup = require('yup');
+import * as yup from 'yup';
 
-    const schema = {
-        create: {
+export default new class UserSchema {
+    create() {
+        return {
             body: yup.object({
                 name: yup.string().required().label('Nome').max(255),
                 phone: yup.string().required().label('Contato'),
@@ -10,40 +10,28 @@ module.exports = () => {
                 password: yup.string().required(),
                 isAdmin: yup.boolean().required().default(false)
             }).noUnknown()
-        },
+        }
+    }
 
-        find: {
+    find() {
+        return {
             params: yup.object({
                 id: yup.number().required()
             }).noUnknown()
-        },
+        };
+    };
 
-        update: {
+    update() {
+        return {
             params: yup.object({
                 id: yup.number().required()
             }).noUnknown(),
-
             body: yup.object({
                 name: yup.string().label('Nome').max(255),
                 phone: yup.string().label('Contato'),
                 email: yup.string().email().label('E-mail'),
                 password: yup.string()
             }).noUnknown()
-        },
-
-        delete: {
-            params: yup.object({
-                id: yup.number().required()
-            })
-        }
+        };
     };
-
-    const schemaValidate = {
-        create: schema.create,
-        find: schema.find,
-        update: schema.update,
-        delete: schema.delete
-    };
-
-    return schemaValidate;
 };

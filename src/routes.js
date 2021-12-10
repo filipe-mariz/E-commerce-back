@@ -1,9 +1,11 @@
 import { Router } from 'express';
-import {User} from './routes/user.routes';
+import { User } from './routes/user.routes';
 
-return setup = () => {
-    const routes = new Router();
-    const prefix = '/api'
+export default class setup {
+    exportRoutes() {
+        const routes = new Router();
+        const prefix = '/api'
 
-    routes.use(`${prefix}/user`, User.setup());
-}
+        routes.use(`${prefix}/user`, User.setup());
+    };
+};
