@@ -19,7 +19,7 @@ class Log {
 		});
     };
 
-    log500 (req, res, next) {
+    log500 (req, res) {
         const log = {
 			counter_id: null,
 			request: getRequest(req),

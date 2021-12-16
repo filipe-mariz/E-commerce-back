@@ -1,8 +1,8 @@
 import UserModel  from '../models/user';
 
-export default new  class UserService {
-    add (addHospital) {
-        return UserModel.create(addHospital)
+export default new class UserService {
+    add (data) {
+        return UserModel.create(data)
     }
 
     read (filter) {

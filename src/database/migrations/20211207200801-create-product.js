@@ -20,7 +20,7 @@ module.exports = {
           type: Sequelize.STRING(255),
           allowNull: false
         },
-        categorie: {
+        category: {
           type: Sequelize.ENUM({
             values: ['feminina', 'masculina']
           }),

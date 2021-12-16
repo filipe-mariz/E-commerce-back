@@ -10,7 +10,7 @@ export default new class HandleApi {
 
     handleException(res, error) {
         if (!error.skip_log) {
-            Log.log500Action(error, req, res);
+            Log.log500Action(error, res);
             return;
         }
 

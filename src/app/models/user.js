@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-class UserModel {
-    User(sequelize, DataTypes) {
+export default new class UserModel {
+    User (sequelize, DataTypes) {
         const User = sequelize.define(
             'users',
             {
@@ -33,6 +33,4 @@ class UserModel {
 
         return User;
     };
-}
-
-export default new UserModel();
+};
