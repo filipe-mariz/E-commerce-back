@@ -1,7 +1,10 @@
-//import 'dotenv';
-const express = require('express')
 import express from 'express';
+import routes from './routes';
 
 const app = express();
 
-app.listen(3333, ()=> console.log('Server is run'));
+app.use(routes);
+
+console.log('routes');
+
+app.listen(3333, () => console.log('Server is run'));

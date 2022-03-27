@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const transaction = await queryInterface.sequelize.transaction();
+    const trx = await queryInterface.sequelize.transaction();
 
     try {
       await queryInterface.createTable('products', {
@@ -47,21 +47,23 @@ module.exports = {
           defaultValue: null,
           allowNull: true
         }
-      }, { transaction })
+      }, { trx });
+
+      await trx.commit();
+
     } catch (error) {
-      await transaction.rollback();
-      throw error;
+      await trx.rollback();
     }
   },
 
-  down: async queryInterface => {
-    const transaction = await queryInterface.sequelize.transaction();
+  down: async (queryInterface, Sequelize) => {
+    const trx = await queryInterface.sequelize.transaction();
 
     try {
-      await queryInterface.dropTable('products', { transaction });
-      await transaction.commit();
+      await queryInterface.dropTable('products', { trx });
+      await trx.commit();
     } catch (error) {
-      await transaction.rollback();
+      await trx.rollback();
       throw error;
     }
   }

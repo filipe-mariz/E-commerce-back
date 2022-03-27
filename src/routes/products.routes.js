@@ -1,13 +1,11 @@
 import { Router } from 'express';
 import ProductController from '../app/controller/product';
 
-export default new class Product {
-    routes () {
-        const router = new Router();
+const routes = new Router();
 
-        router.post('/', ProductController.createAction);
-        router.get('/:id?', ProductController.indexAction);
-        router.put('/:id', ProductController.updateAction);
-        router.delete('/:id', ProductController.deleteAction);
-    }
-}
+routes.post('/', ProductController.createAction);
+routes.get('/:id?', ProductController.indexAction);
+routes.put('/:id', ProductController.updateAction);
+routes.delete('/:id', ProductController.deleteAction);
+
+export default routes;

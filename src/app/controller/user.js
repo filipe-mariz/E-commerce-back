@@ -1,7 +1,7 @@
 import  UserService  from '../services/user';
 import HandleApi from '../../errors/handle-api';
 
-export default new class UserController {
+export default {
 	async createAction(req, res) {
 		try {
 			const response = await UserService.add(...req.body)
@@ -10,7 +10,7 @@ export default new class UserController {
 		} catch (error) {
 			return HandleApi.handleError(req, res, error);
 		}
-	}
+	},
 
 	async readAction (req, res) {
 		try {
@@ -23,7 +23,7 @@ export default new class UserController {
 		} catch (error) {
 			return HandleApi.handleError(req, res, error);
 		}
-	}
+	},
 
 	async updateAction (req, res) {
 		try {
@@ -36,7 +36,7 @@ export default new class UserController {
 		} catch (error) {
 			return HandleApi.handleError(req, res, error);
 		}
-	}
+	},
 
 	async deleteAction (req, res) {
 		try {
