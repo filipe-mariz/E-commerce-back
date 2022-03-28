@@ -1,6 +1,6 @@
 import Stores from '../models/store';
 
-export default new class Store {
+class Store {
     create () {
         return Stores.create();
     }
@@ -21,3 +21,5 @@ export default new class Store {
         return Stores.delete({ where: filter })
     }
 }
+
+export default new Store();

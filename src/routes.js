@@ -1,12 +1,20 @@
 import { Router } from 'express';
-import User from './routes/user.routes';
 import Product from './routes/products.routes';
 
+class Routes {
+    constructor () {
+        this.routes = Router();
 
-const routes = Router();
-const prefix = 'api';
+        this.productRoutes = new Product();
+    };
 
-routes.use(`${prefix}/user`, User.routes());
-routes.use(`${prefix}/products`, Product.routes());
+    setup () {
+        const prefix = 'api';
 
-export default routes;
+        this.routes.use(`${prefix}/products`, this.productRoutes.setup());
+
+        return this.routes;
+    };
+};
+
+export default Routes;

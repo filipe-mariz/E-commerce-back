@@ -1,11 +1,22 @@
 import { Router } from 'express';
-import ProductController from '../app/controller/product';
+import Product from '../app/controller/product';
 
-const routes = new Router();
+class ProductRoute extends Product {
+    constructor () {
+        super()
 
-routes.post('/', ProductController.createAction);
-routes.get('/:id?', ProductController.indexAction);
-routes.put('/:id', ProductController.updateAction);
-routes.delete('/:id', ProductController.deleteAction);
+        this.routes = new Router();
+    };
 
-export default routes;
+    setup() {
+        this.routes.post('/', this.createAction);
+        this.routes.get('/:id?', this.indexAction);
+        this.routes.put('/:id', this.updateAction);
+        this.routes.delete('/:id', this.deleteAction);
+
+        return this.routes;
+    };
+
+};
+
+export default ProductRoute;

@@ -3,22 +3,25 @@ require("dotenv").config({
 });
 
 import express, { json } from "express";
+import Routes from './routes';
 
 class AppController {
     constructor() {
         this.express = express();
 
+        this.routesa = new Routes()
+
         this.middlewares();
-        this.routes();
-    }
+        // this.routes();
+    };
 
     middlewares() {
         this.express.use(json());
-    }
+    };
 
     routes() {
-        this.express.use(require("./routes"));
-    }
+        this.express.use(this.routesa);
+    };
 }
 
-export default new AppController().express;
+export default AppController;

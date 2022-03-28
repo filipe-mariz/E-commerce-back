@@ -1,19 +1,58 @@
+import HandleService from './base';
 import ProductModel from '../models/products';
 
-export default new class ProductService {
-    add(data) {
-        return ProductModel.create(data);
+class ProductService extends HandleService {
+    constructor () {
+        super();
     };
-    find(filter) {
-        return ProductModel.findOne({ where: filter });
+
+    add (data) {
+        try {
+            return ProductModel.create(data);
+        } catch (error) {
+            return this.error;
+        }
     };
-    listAll(filter) {
-        return ProductModel.findAll({ where: filter });
+
+    find (filter) {
+        try {
+            return ProductModel.findOne({
+                where: {
+                    id: filter.id
+                }
+            });
+        } catch (error) {
+            return this.error;
+        };
     };
-    update(filter, change) {
-        return ProductModel.update(change, { where: filter });
+
+    listAll (filter) {
+        try {
+            return ProductModel.findAll(filter);
+        } catch (error) {
+            return this.error;
+        }
     };
-    delete(filter) {
-        return ProductModel.destroy({ where: filter });
+
+    update (change, filter) {
+        try {
+            return ProductModel.update(change, {
+                where: {
+                    id: filter.id
+                }
+            });
+        } catch (error) {
+            return this.error;
+        }
+    };
+
+    delete (filter) {
+        try {
+            return ProductModel.destroy({ where: filter });
+        } catch (error) {
+            return this.error;
+        }
     }
 }
+
+export default ProductService;

@@ -1,52 +1,68 @@
-import ProductSrvice from '../services/products';
-import HandleApi from '../../errors/handle-api';
+import BaseController from './base';
+import ProductService from '../services/products';
 
-export default {
+class Product extends BaseController {
+    constructor () {
+        super();
+
+        this.productService = new ProductService();
+    };
+
     async createAction (req, res) {
         try {
-            const response = await ProductSrvice.add(...req.body);
+            const response = await this.productService.add(req.body);
 
-            HandleApi.handleResponse(res, response);
+            this.success(res, response);
         } catch (error) {
-            HandleApi.handleError(req, res, error);
+            this.error(res, error);
         };
-    },
+    };
 
     async indexAction (req, res) {
         try {
-            const filter = req.filter.id;
-            const action = filter ? 'find' : 'listAll'
+            const filter = {
+                id: req.params.id
+            }
 
-            const response = await ProductSrvice[action](filter);
+            const action = filter.id ? 'find' : 'listAll'
+            const filtered = filter = filter.id ? filter : delete filter.id
 
-            HandleApi.handleResponse(res, response);
+            const response = await this.productService[action](filtered);
+
+            this.success(res, response);
         } catch (error) {
-            HandleApi.handleError(req, res, error);
+            this.error(res, error);
         }
-    },
+    }
 
     async updateAction (req, res) {
         try {
             const changes = req.data;
-            const filter = req.filter.id;
+            const filter = {
+                id: req.params.id
+            }
 
-            const response = await ProductSrvice.update(changes, filter);
+            const response = await this.productService.update(changes, filter);
 
-            HandleApi.handleResponse(res, response);
+            this.success(res, response);
         } catch (error) {
-            HandleApi.handleError(req, res, error);
+            this.error(res, error);
         }
-    },
+    }
 
     async deleteAction (req, res) {
         try {
-            const filter = req.filter.id;
+            const filter = {
+                id: req.params.id
+            }
 
-            const response = await ProductSrvice.delete(filter);
+            const response = await this.productService.delete(filter);
 
-            HandleApi.handleResponse(res, response);
+            this.success(res, response);
         } catch (error) {
-            HandleApi.handleError(req, res, error);
+            this.error(res, error);
         };
     }
 };
+
+export default Product;

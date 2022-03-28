@@ -1,9 +1,9 @@
 import express from 'express';
-import routes from './routes';
+import Routes from './routes';
 
 const app = express();
 
-app.use(routes);
+app.use(Routes);
 
 console.log('routes');
 
